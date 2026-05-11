@@ -1,0 +1,138 @@
+:root {
+    --fundo-app: #f8fafc;
+    --fundo-painel: #ffffff;
+    --cor-borda: #e2e8f0;
+    --texto-principal: #1e293b;
+    --texto-suave: #64748b;
+    
+    /* Gradiente WaterInBox */
+    --marca-1: #8fa5f1;
+    --marca-2: #6f8beb;
+    --marca-3: #6081f6;
+    --marca-4: #2b4cbd;
+    --marca-5: #223bc2;
+
+    --alerta-vermelho: #ef4444;
+    --status-verde: #10b981;
+    
+    --fonte-padrao: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+    --fonte-dados: ui-monospace, SFMono-Regular, "Courier New", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--fundo-app);
+    color: var(--texto-principal);
+    font-family: var(--fonte-padrao);
+    padding: 24px;
+}
+
+.estrutura { max-width: 1000px; margin: 0 auto; }
+
+.barra-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.titulo-marca { 
+    font-size: 2rem; 
+    font-weight: 800; 
+    background: linear-gradient(to right, var(--marca-1), var(--marca-2), var(--marca-3), var(--marca-4), var(--marca-5));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitulo { color: var(--texto-suave); font-size: 0.9rem; font-weight: 500; }
+
+.cartao-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--texto-suave);
+    background: var(--fundo-painel);
+    padding: 6px 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 99px;
+}
+
+.ponto { width: 8px; height: 8px; border-radius: 50%; }
+.ponto.ativo { background-color: var(--status-verde); box-shadow: 0 0 8px rgba(16, 185, 129, 0.4); }
+.ponto.alerta { background-color: #f59e0b; }
+
+.grade-painel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.painel {
+    background: var(--fundo-painel);
+    border: 1px solid var(--cor-borda);
+    border-top: 4px solid var(--marca-1);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.painel-grafico, .painel-eventos { grid-column: 1 / -1; }
+
+.cabecalho-painel h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+    margin-bottom: 20px;
+}
+
+.grade-sensores { display: flex; flex-direction: column; gap: 24px; }
+
+.rotulo-dados { font-size: 0.75rem; font-weight: 600; color: var(--texto-suave); display: block; }
+
+.valor-dados {
+    font-family: var(--fonte-dados);
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--marca-5); 
+}
+
+.unidade-dados { color: var(--texto-suave); font-size: 1.1rem; }
+
+.barra-progresso {
+    width: 100%;
+    height: 8px;
+    background: var(--cor-borda);
+    border-radius: 4px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.preenchimento-progresso {
+    height: 100%;
+    background: var(--marca-5);
+    transition: width 0.5s ease;
+}
+
+.botao-principal {
+    width: 100%;
+    padding: 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+.botao-principal.estado-aberto { background: var(--status-verde); }
+.botao-principal.estado-perigo { background: var(--alerta-vermelho); }
+
+.tabela-eventos { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.tabela-eventos th { color: var(--texto-suave); font-weight: 600; padding-bottom: 12px; border-bottom: 1px solid var(--cor-borda); text-align: left; }
+.tabela-eventos td { padding: 12px 0; border-bottom: 1px solid var(--cor-borda); }
+.celula-tempo { font-family: var(--fonte-dados); color: var(--marca-5); width: 100px; }

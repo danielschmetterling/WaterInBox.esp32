@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaterInBox | Monitoração Ativa</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+</head>
+<body>
+    <div class="estrutura">
+        <header class="barra-topo">
+            <div>
+                <h1 class="titulo-marca">WaterInBox</h1>
+                <p class="subtitulo">Monitoramento e Prevenção de Vazamentos</p>
+            </div>
+            <div class="cartao-status">
+                <span id="ponto-mqtt" class="ponto alerta"></span>
+                <span id="status-conexao">Aguardando Telemetria</span>
+            </div>
+        </header>
+
+        <main class="grade-painel">
+            <section class="painel">
+                <div class="cabecalho-painel">
+                    <h2>Sensores em Tempo Real</h2>
+                </div>
+                <div class="grade-sensores">
+                    <div class="caixa-dados">
+                        <span class="rotulo-dados">NÍVEL DO RESERVATÓRIO</span>
+                        <div class="grupo-valor">
+                            <span id="nivel-agua" class="valor-dados">--</span>
+                            <span class="unidade-dados">%</span>
+                        </div>
+                        <div class="barra-progresso">
+                            <div id="barra-nivel" class="preenchimento-progresso" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="caixa-dados">
+                        <span class="rotulo-dados">FLUXO DE SAÍDA</span>
+                        <div class="grupo-valor">
+                            <span id="fluxo-saida" class="valor-dados">--</span>
+                            <span class="unidade-dados">L/min</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="painel painel-atuacao">
+                <div class="cabecalho-painel">
+                    <h2>Controle de Atuação Física</h2>
+                </div>
+                <div class="conteudo-atuacao">
+                    <p class="texto-informativo">Controle manual da válvula solenoide na entrada da caixa.</p>
+                    <button id="botao-valvula" class="botao-principal estado-aberto" onclick="alternarValvula()">
+                        ESTADO: ABERTA (CLIQUE PARA FECHAR)
+                    </button>
+                </div>
+            </section>
+
+            <section class="painel painel-grafico">
+                <div class="cabecalho-painel">
+                    <h2>Integração Volumétrica Local</h2>
+                </div>
+                <div class="container-grafico">
+                    <canvas id="graficoConsumo"></canvas>
+                </div>
+            </section>
+
+            <section class="painel painel-eventos">
+                <div class="cabecalho-painel">
+                    <h2>Registro de Eventos</h2>
+                </div>
+                <div class="container-tabela">
+                    <table class="tabela-eventos">
+                        <thead>
+                            <tr>
+                                <th>HORA</th>
+                                <th>EVENTO / ANOMALIA</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-logs">
+                            <tr>
+                                <td class="celula-tempo">--:--:--</td>
+                                <td>Inicializando sistema WaterInBox...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
